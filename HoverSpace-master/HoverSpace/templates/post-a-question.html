@@ -1,0 +1,37 @@
+{% extends "base.html"%}
+{% block content %}
+    <div id = "post_cont" class = "container"> 
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+          <hr/>
+            <form class="form-horizontal" action = "" method="post" role="question">
+              <div class = "form-group">
+                <br>
+                {{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden' %}
+                <div class="control-group">
+                <br>
+                  <label class="control-label" for="{{ field.name }}" > {{ field.label }}</label>
+                  <div class="control">
+                    {{ field(class_="form-control input-md")}}
+                  </div>
+                </div>
+                {% endfor %}
+                <br>
+                <div id="members">
+                  <p><strong>Select Tags: </strong></p>
+                    {% for i in choices %}
+                        <input type="checkbox" name="tag" value="{{i}}">{{ i }}
+                        <br>
+                    {% endfor %}
+                </div>
+                <div class="control-group">
+                <br>
+                  <button type="submit" id="submit_btn" class="btn btn-default">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+{% endblock %}

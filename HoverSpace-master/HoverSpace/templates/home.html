@@ -1,0 +1,61 @@
+{% extends "base.html"%}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="../../static/css/home.css">
+<hr/>
+<div class = row>
+<div id = "tag_column" class = "col-lg-2">
+    <h4 id = "tag_id">Tags</h4>
+    <hr/>
+        <ul id="tag_list">
+          {% for t in tags %}
+            <li><a href="{{ url_for('viewTagQuestion', tag=t) }}">{{ t }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+  <div class = "col-lg-8">
+      {% for i in feed %}
+      <div class = "row ">
+  <div class= "col-lg-8">
+    <div class = "media-object">
+      <div class = "media-object-section">
+          <div id = "avatar" class="thumbnail pull-left">
+                <img  src="http://placehold.it/80x80&text=[img]" />
+          </div>
+      </div>
+      <div class = "media-object-section">
+        <a id="Question" href = "{{ i['ques_url']}}">{{ i['short_description'] }}</a>
+        <br>
+        <h6 id="postedBy">
+          Posted By: <a href="{{ url_for('profile', userID=i['postedBy']) }}">{{ i['postedBy'] }}</a>
+        </h6>
+        <h6 id="time_stamp">Posted On: {{ i['timestamp'].strftime('%Y-%m-%d') }}</h6>
+        <h6 id="ans_count">{{ i['ansCount'] }} Answers</h6>
+      </div>
+    </div>
+  </div>
+  </div>
+  <hr/>
+      {% endfor %}
+      </div>
+      <div id = "leader_column" class ="col-lg-2">
+    <h4>Top Contributers</h4>
+    <hr/>
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Karma</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for name in topcontributors %}
+        <tr>
+          <td><a href="{{ url_for('profile', userID=name['_id']) }}">{{ name['_id'] }}</a></td>
+          <td>{{ name['karma'] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+      </div>
+  {% endblock %}

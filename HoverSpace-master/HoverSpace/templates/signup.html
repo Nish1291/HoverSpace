@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="../../static/css/signup.css">
+<div class="container">
+    <div class="row">
+      <div  id = "signup_form" class="col-md-3 col-md-offset-4" style="margin-left: 428px;">
+        <form class="form-horizontal" action="" method="POST" role="form">
+          <div id="legend">
+          <br>
+            <legend class="">Register</legend>
+          </div>
+          {{ form.hidden_tag() }}
+          {% for field in form if field.widget.input_type != 'hidden' %}
+          <div class="control-group">
+            <label class="control-label" for="{{ field.name }}" > {{ field.label }}</label>
+            <div class="control">
+              {{ field(class_="form-control input-md") }}
+            </div>
+          </div>
+          {% endfor %}
+          <h6>
+            * Username length should be greater than 3<br>
+            * Password length should be greater than 3<br>
+            * EmailID should be valid
+          </h6>
+          <div class="control-group">
+          <br>
+            <button type="submit" id="signup_btn" class="btn btn-default">Register</button>
+          </div>
+          <br>
+        </form>
+      </div>
+    </div>
+</div>
+
+{% endblock %}
